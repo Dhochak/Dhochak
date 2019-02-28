@@ -1,14 +1,12 @@
 pipeline {
     agent any
     stages {
-        stage('build') {
+        stage('Deploy') {
             steps {
-                retry(3) {
-                    sh './test.sh'
-                }
-
-                timeout(time: 5, unit: 'MINUTES') {
-                    sh './test_bkp.sh'
+                timeout(time: 3, unit: 'MINUTES') {
+                    retry(5) {
+                        sh './test.sh'
+                    }
                 }
             }
         }
