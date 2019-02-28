@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('Deploy') {
+        stage('build') {
             steps {
                 retry(3) {
                     sh './test.sh'
