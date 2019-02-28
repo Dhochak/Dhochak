@@ -1,14 +1,15 @@
 pipeline {
-    agent { any { } }
+    agent any
     stages {
-        stage('build') {
+        stage('Deploy') {
             steps {
-                sh '''
-                echo "Hello World"
-                echo "Dhochak"
-                date
-                pwd
-                '''
+                retry(3) {
+                    sh './test.sh'
+                }
+
+                timeout(time: 1, unit: 'MINUTES') {
+                    sh './test_bkp.sh'
+                }
             }
         }
     }
